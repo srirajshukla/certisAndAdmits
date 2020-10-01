@@ -1,20 +1,20 @@
 import numpy as np
 import pandas as pd
-import tkinter as tk
-import tkinter.filedialog as tkfd
 import qrcode
 import cv2 as cv
 import os
 
 data = pd.read_excel('data.xlsx', header=0)
 print(cv.__version__)
-print("cv is working")
 
 # creating the certificate
 font = cv.FONT_HERSHEY_SIMPLEX
 names = data['Name']
 for name in names:
+    # reading the format from the given location, change this as per need
     format = cv.imread('./format/certifFormat.png')
+    # place the required text, here 2 is the size of the font, (0, 255, 0) is the color
+    # (400, 380) is the starting coordinate of written text.
     cv.putText(format, name, (400, 380), font, 2, (0, 255, 0), 2, cv.LINE_AA)
     cv.imwrite('./gencert/'+name+'.png', format)
 
